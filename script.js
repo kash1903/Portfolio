@@ -106,3 +106,24 @@ function type() {
 if (typingText) {
     type();
 }
+
+// Scroll Reveal Animation
+const revealElements = document.querySelectorAll('.section, .hero-content, .project-card, .skill-category, .timeline-item, .contact-item');
+
+const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+        }
+    });
+}, {
+    root: null,
+    threshold: 0.15,
+    rootMargin: "0px"
+});
+
+revealElements.forEach(element => {
+    element.classList.add('hidden');
+    revealObserver.observe(element);
+});
